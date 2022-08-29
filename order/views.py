@@ -36,7 +36,11 @@ def menu(request, shop):
 
 @csrf_exempt
 def order(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
+        order = Order.objects.all()
+        return render(request, 'order/order_list.html', {'order_list': order})
+
+    elif request.method == 'POST':
         address = request.POST['address']
         shop = request.POST['shop']
         food_list = request.POST.getlist('menu')
@@ -50,4 +54,4 @@ def order(request):
         for food in food_list:
             order_item.orderfood_set.create(food_name=food)
 
-        return HttpResponse(status=200)
+        return render(request, 'order/success.html')
