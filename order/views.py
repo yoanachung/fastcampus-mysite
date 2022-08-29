@@ -9,8 +9,8 @@ from order.serializers import ShopSerializer, MenuSerializer
 def shop(request):
     if request.method == 'GET':
         shop = Shop.objects.all()
-        serializer = ShopSerializer(shop, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return render(request, 'order/shop_list.html', {'shop_list': shop})
+
     elif request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = ShopSerializer(data=data)
@@ -23,8 +23,8 @@ def shop(request):
 def menu(request, shop):
     if request.method == 'GET':
         menu = Menu.objects.filter(shop=shop)
-        serializer = MenuSerializer(menu, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return render(request, 'order/menu_list.html', {'menu_list': menu})
+
     elif request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = MenuSerializer(data=data)
