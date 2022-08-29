@@ -3,4 +3,5 @@ from owner import views
 
 app_name = 'owner'
 urlpatterns = [
+    path('orders/<int:shop>', views.orders, name="orders"),
 ]
