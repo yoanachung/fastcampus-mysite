@@ -3,4 +3,5 @@ from delivery import views
 
 app_name = 'delivery'
 urlpatterns = [
+    path('orders/', views.orders, name="orders"),
 ]
